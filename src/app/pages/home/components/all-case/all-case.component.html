@@ -1,0 +1,118 @@
+<div class="row" *ngIf="total">
+  <div class="col-lg-12 mb-3">
+    <div class="card bg-warning">
+      <!-- All Case -->
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">ยืนยันแล้ว</h5>
+            <p class="card-text">
+              <span> {{ total.Confirmed + total.NewConfirmed }} ราย </span>
+              <span class="font-weight-bolder">
+                วันนี้เพิ่มขึ้น {{ total.NewConfirmed }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Death -->
+  <div class="col-lg-4">
+    <div class="card bg-danger">
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">ผู้เสียชีวิต</h5>
+            <p class="card-text">
+              <span>{{ total.Deaths + total.NewDeaths }} ราย </span>
+              <span class="font-weight-bolder">
+                วันนี้เพิ่มขึ้น {{ total.NewDeaths }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Recoveres -->
+  <div class="col-lg-4">
+    <div class="card bg-success">
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">รักษาหายแล้ว</h5>
+            <p class="card-text">
+              <span> {{ total.Recovered + total.NewRecovered }} ราย </span>
+              <span class="font-weight-bolder">
+                วันนี้เพิ่มขึ้น {{ total.NewRecovered }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Hospitalized -->
+  <div class="col-lg-4">
+    <div class="card bg-info">
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">กำลังรักษา</h5>
+            <p class="card-text">
+              <span>{{ total.Hospitalized + total.NewHospitalized }} ราย</span>
+              <span class="font-weight-bold">
+                วันนี้เพิ่มขึ้น {{ total.NewHospitalized }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h4 class="card-title">ไทม์ไลน์</h4>
+      <ngx-datatable
+        #table
+        class="material mt-3"
+        style="height: 500px;"
+        [columns]="columns"
+        columnMode="force"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [rowHeight]="50"
+        [rows]="rows"
+        [scrollbarV]="true"
+        [scrollbarH]="true"
+      >
+      </ngx-datatable>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h4 class="card-title">ผู้ป่วยทั้งหมด</h4>
+      <ngx-datatable
+        #tableAllCase
+        class="material mt-3"
+        style="height: 500px;"
+        [columns]="columnsAllCase"
+        columnMode="force"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [rowHeight]="50"
+        [rows]="rowsAllCase"
+        [scrollbarV]="true"
+        [scrollbarH]="true"
+      >
+      </ngx-datatable>
+    </div>
+  </div>
+</ng-container>

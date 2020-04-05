@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { HomeService } from "../../services/home.service";
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  selector: "home-form",
+  templateUrl: "./form.component.html",
+  styleUrls: ["./form.component.scss"]
 })
 export class FormComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private homeService: HomeService) {
+    // this.homeService.getThailand().then(res => console.log(res));
+    // this.homeService.getHistorical().then(res => console.log(res));
   }
 
+  ngOnInit(): void {}
 }
