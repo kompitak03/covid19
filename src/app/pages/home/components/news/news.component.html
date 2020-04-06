@@ -1,0 +1,84 @@
+<div class="card my-5" id="news">
+  <div class="card-header">
+    <h4 class="card-title">ข่าวสาร</h4>
+  </div>
+  <div class="card-body">
+    <carousel
+      itemsPerSlide="1"
+      singleSlideOffset="true"
+      [interval]="false"
+      noWrap="true"
+    >
+      <slide *ngFor="let new of news; let index = index">
+        <div class="row">
+          <div class="col-lg-4" *ngFor="let col of new; let index2 = index">
+            <div class="card w-100" style="height: 400px; position: relative;">
+              <div class="card-body">
+                <h5 class="card-title">จังหวัด {{ col.Province }}</h5>
+                <h5 class="card-title">วันที่ {{ col.Date }}</h5>
+                <h5 class="card-title">เวลา {{ col.Time }}</h5>
+                <p class="card-text">สถานที่ {{ col.Location }}</p>
+                <button
+                  class="btn btn-outline-success"
+                  style="position: absolute; bottom: 50px; right: 15px;"
+                  (click)="openModal(modalDetail, index, index2)"
+                >
+                  รายละเอียด
+                </button>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted float-right">
+                  อัปเดตเมื่อ {{ col.Update | date: "medium" }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
+
+<ng-template #modalDetail>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">จังหวัด {{ onModal.Province }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="card-text">
+      <span class="font-weight-bold"><u>วันที่</u></span
+      ><br />
+      {{ onModal.Date }} เวลา {{ onModal.Time }}
+    </p>
+    <p class="card-text" *ngIf="onModal.Location">
+      <span class="font-weight-bold"><u>สถานที่</u></span
+      ><br />
+      {{ onModal.Location }}
+    </p>
+    <p class="card-text" *ngIf="onModal.Recommend">
+      <span class="font-weight-bold"><u>คำแนะนำ</u></span>
+      <span [innerHTML]="onModal.Recommend"></span>
+    </p>
+    <p class="card-text" *ngIf="onModal.AnnounceBy">
+      <span class="font-weight-bold"><u>ประกาศโดย</u></span
+      ><br />
+      {{ onModal.AnnounceBy }}
+    </p>
+    <p class="card-text" *ngIf="onModal.Detail">
+      <span class="font-weight-bold"><u>รายละเอียด</u></span>
+      {{ onModal.Detail }}
+    </p>
+    <p class="card-text float-right">
+      <small class="text-muted float-right">
+        อัปเดตเมื่อ {{ onModal.Update | date: "medium" }}
+      </small>
+    </p>
+  </div>
+</ng-template>

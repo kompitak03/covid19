@@ -1,17 +1,17 @@
 <ng-container>
-  <div class="card my-5">
+  <div class="card mt-5 mb-5">
     <div class="card-body">
-      <h4 class="card-title">ผู้ป่วยทั้งหมด</h4>
+      <h4 class="card-title">ไทม์ไลน์</h4>
       <ngx-datatable
-        #tableAllCase
+        #table
         class="material mt-3"
         style="height: 500px;"
-        [columns]="columnsAllCase"
+        [columns]="columns"
         columnMode="force"
         [headerHeight]="50"
         [footerHeight]="0"
         [rowHeight]="50"
-        [rows]="rowsAllCase"
+        [rows]="rows"
         [scrollbarV]="true"
         [scrollbarH]="true"
       >
