@@ -9,6 +9,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 })
 export class NewsComponent implements OnInit {
   news = [];
+  newsMobile = [];
   modalRef: BsModalRef;
   onModal: any = {};
 
@@ -19,6 +20,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeService.getArea().then((res: any) => {
+      this.newsMobile = res.Data;
       let mock = [];
       let w = 0;
       for (let i = 1; i < res.Data.length + 1; i++) {
@@ -37,7 +39,10 @@ export class NewsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, index, index2) {
     this.modalRef = this.modalService.show(template, { class: "modal-xl" });
-    this.onModal = this.news[index][index2];
-    console.log(this.onModal);
+    if (index2 != "") {
+      this.onModal = this.news[index][index2];
+    } else {
+      this.onModal = this.newsMobile[index];
+    }
   }
 }

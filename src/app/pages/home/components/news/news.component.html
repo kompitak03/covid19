@@ -2,7 +2,7 @@
   <div class="card-header">
     <h4 class="card-title">ข่าวสาร</h4>
   </div>
-  <div class="card-body">
+  <div class="card-body" id="dasktop">
     <carousel
       itemsPerSlide="1"
       singleSlideOffset="true"
@@ -22,6 +22,41 @@
                   class="btn btn-outline-success"
                   style="position: absolute; bottom: 50px; right: 15px;"
                   (click)="openModal(modalDetail, index, index2)"
+                >
+                  รายละเอียด
+                </button>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted float-right">
+                  อัปเดตเมื่อ {{ col.Update | date: "medium" }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+  <div class="card-body" id="mobile">
+    <carousel
+      itemsPerSlide="1"
+      singleSlideOffset="true"
+      [interval]="false"
+      noWrap="true"
+    >
+      <slide *ngFor="let col of newsMobile; let index = index">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card w-100" style="height: 400px; position: relative;">
+              <div class="card-body">
+                <h5 class="card-title">จังหวัด {{ col.Province }}</h5>
+                <h5 class="card-title">วันที่ {{ col.Date }}</h5>
+                <h5 class="card-title">เวลา {{ col.Time }}</h5>
+                <p class="card-text">สถานที่ {{ col.Location }}</p>
+                <button
+                  class="btn btn-outline-success"
+                  style="position: absolute; bottom: 50px; right: 15px;"
+                  (click)="openModal(modalDetail, index, '')"
                 >
                   รายละเอียด
                 </button>
