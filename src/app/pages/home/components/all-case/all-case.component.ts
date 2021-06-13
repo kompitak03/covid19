@@ -62,11 +62,11 @@ export class AllCaseComponent implements OnInit {
         this.rowsAllCase = res.Data;
       }
     });
-    this.homeService.getAllCaseSum().then((res: any) => {
-      console.log(res);
-    });
-    this.homeService.getArea().then((res: any) => {
-      console.log(res);
-    });
+    // this.homeService.getAllCaseSum().then((res: any) => {
+    //   console.log(res);
+    // });
+    // this.homeService.getArea().then((res: any) => {
+    //   console.log(res);
+    // });
   }
 }
