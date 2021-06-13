@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { pipe, from } from "rxjs";
 import { filter, map, flatMap, single } from "rxjs/operators";
 
-const api = "https://covid19.th-stat.com/api/open/";
+const api = "https://covid19.ddc.moph.go.th/api/open/";
 
 @Injectable({
   providedIn: "root",
