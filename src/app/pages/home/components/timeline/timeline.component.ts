@@ -13,11 +13,13 @@ export class TimelineComponent implements OnInit {
   temp = [];
 
   columns = [
-    { prop: "Date", name: "วันที่" },
-    { prop: "Confirmed", name: "ยืนยันแล้ว" },
-    { prop: "Recovered", name: "รักษาหายแล้ว" },
-    { prop: "Hospitalized", name: "กำลังรักษา" },
-    { prop: "Deaths", name: "เสียชีวิต" },
+    { prop: "txn_date", name: "วันที่" },
+    { prop: "new_case", name: "รายใหม่"},
+    { prop: "new_recovered", name: "กำลังรักษา" },
+    { prop: "new_death", name: "เสียชีวิต" },
+    { prop: "total_case", name: "ยืนยันแล้ว" },
+    { prop: "total_recovered", name: "รักษาหายแล้ว" },
+    { prop: "total_death", name: "เสียชีวิตรวม" },
   ];
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
@@ -26,13 +28,14 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeService.getTimeLine().then((res: any) => {
+      console.log(res);
       if (res) {
-        res.Data = res.Data.reverse();
+        res = res.reverse();
         // cache our list
-        this.temp = [...res.Data];
+        this.temp = [...res];
 
         // push our inital complete list
-        this.rows = res.Data;
+        this.rows = res;
       }
     });
   }

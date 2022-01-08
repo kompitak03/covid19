@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { pipe, from } from "rxjs";
 import { filter, map, flatMap, single } from "rxjs/operators";
 
-const api = "https://covid19.th-stat.com/json/covid19v2/";
+const api = "https://covid19.ddc.moph.go.th/api/Cases";
 
 @Injectable({
   providedIn: "root",
@@ -12,11 +12,11 @@ export class HomeService {
   constructor(private httpClient: HttpClient) {}
 
   getToday() {
-    return this.httpClient.get(api + "getTodayCases.json").toPromise();
+    return this.httpClient.get(`${api}/today-cases-all`).toPromise();
   }
 
   getTimeLine() {
-    return this.httpClient.get(api + "getTimeline.json").toPromise();
+    return this.httpClient.get(`${api}/timeline-cases-all`).toPromise();
   }
 
   getAllCase() {
