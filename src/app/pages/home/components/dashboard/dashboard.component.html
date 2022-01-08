@@ -1,20 +1,20 @@
-<div class="row my-5" *ngIf="total?.lenth > 0; else notUpdate">
-  <div class="col-xl-3 col-md-6">
+<div class="row my-5" *ngIf="total; else notUpdate">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-primary border-primary text-white">
       <!-- All Case -->
       <div class="row no-gutters">
           <div class="card-body">
             <h5 class="card-title">ยืนยันแล้ว</h5>
             <p class="card-text">
-              <span> {{ total.Confirmed }} ราย </span>
+              <span> {{ total.total_case }} ราย </span>
               <span class="font-weight-bolder">
-                <span *ngIf="total.NewConfirmed >= 0; else NewConfirmed">
+                <span *ngIf="total.new_case >= 0; else NewConfirmed">
                   วันนี้เพิ่มขึ้น
                 </span>
                 <ng-template #NewConfirmed>
                   วันนี้ลดลง
                 </ng-template>
-                {{ onCutMinus(total.NewConfirmed) }}
+                {{ total.new_case }}
               </span>
             </p>
           </div>
@@ -22,21 +22,21 @@
     </div>
   </div>
   <!-- Death -->
-  <div class="col-xl-3 col-md-6">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-danger border-danger text-white">
       <div class="row no-gutters">
           <div class="card-body">
             <h5 class="card-title">ผู้เสียชีวิต</h5>
             <p class="card-text">
-              <span>{{ total.Deaths }} ราย </span>
+              <span>{{ total.total_death }} ราย </span>
               <span class="font-weight-bolder">
-                <span *ngIf="total.NewDeaths >= 0; else NewDeaths">
+                <span *ngIf="total.new_death >= 0; else NewDeaths">
                   วันนี้เพิ่มขึ้น
                 </span>
                 <ng-template #NewDeaths>
                   วันนี้ลดลง
                 </ng-template>
-                {{ total.NewDeaths }}
+                {{ total.new_death }}
               </span>
             </p>
           </div>
@@ -44,43 +44,21 @@
     </div>
   </div>
   <!-- Recoveres -->
-  <div class="col-xl-3 col-md-6">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-success border-success text-white">
       <div class="row no-gutters">
           <div class="card-body">
             <h5 class="card-title">รักษาหายแล้ว</h5>
             <p class="card-text">
-              <span> {{ total.Recovered }} ราย </span>
+              <span> {{ total.total_recovered }} ราย </span>
               <span class="font-weight-bolder">
-                <span *ngIf="total.NewRecovered >= 0; else recoveres">
+                <span *ngIf="total.new_recovered >= 0; else recoveres">
                   วันนี้เพิ่มขึ้น
                 </span>
                 <ng-template #recoveres>
                   วันนี้ลดลง
                 </ng-template>
-                {{ onCutMinus(total.NewRecovered) }}
-              </span>
-            </p>
-          </div>
-      </div>
-    </div>
-  </div>
-  <!-- Hospitalized -->
-  <div class="col-xl-3 col-md-6">
-    <div class="card bg-info border-info text-white">
-      <div class="row no-gutters">
-          <div class="card-body">
-            <h5 class="card-title">กำลังรักษา</h5>
-            <p class="card-text">
-              <span>{{ total.Hospitalized }} ราย</span>
-              <span class="font-weight-bold">
-                <span *ngIf="total.NewHospitalized >= 0; else Hospitalized">
-                  วันนี้เพิ่มขึ้น
-                </span>
-                <ng-template #Hospitalized>
-                  วันนี้ลดลง
-                </ng-template>
-                {{ onCutMinus(total.NewHospitalized) }}
+                {{ total.new_recovered }}
               </span>
             </p>
           </div>

@@ -11,8 +11,10 @@ export class DashboardComponent implements OnInit {
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
-    this.homeService.getToday().then((res) => {
-      this.total = res;
+    this.homeService.getToday().then((res: any[]) => {
+      if (res && res.length > 0) {
+        this.total = res[0];
+      }
     });
   }
 
