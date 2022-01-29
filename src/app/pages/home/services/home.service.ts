@@ -9,7 +9,7 @@ const api = "https://covid19.ddc.moph.go.th/api/Cases";
   providedIn: "root",
 })
 export class HomeService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getToday() {
     return this.httpClient.get(`${api}/today-cases-all`).toPromise();
@@ -29,5 +29,9 @@ export class HomeService {
 
   getArea() {
     return this.httpClient.get(api + "area").toPromise();
+  }
+
+  getTodayCaseByProvinces() {
+    return this.httpClient.get(`${api}/today-cases-by-provinces`).toPromise();
   }
 }

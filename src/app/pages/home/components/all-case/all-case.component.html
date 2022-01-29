@@ -1,21 +1,30 @@
 <ng-container>
-  <div class="card my-5">
+  <div class="card mb-5">
     <div class="card-body">
-      <h4 class="card-title">ผู้ป่วยทั้งหมด</h4>
-      <ngx-datatable
-        #tableAllCase
-        class="material mt-3"
-        style="height: 500px;"
-        [columns]="columnsAllCase"
-        columnMode="force"
-        [headerHeight]="50"
-        [footerHeight]="0"
-        [rowHeight]="50"
-        [rows]="rowsAllCase"
-        [scrollbarV]="true"
-        [scrollbarH]="true"
-      >
-      </ngx-datatable>
+      <h4 class="card-title">
+        รายจังหวัด
+      </h4>
+      <!-- Provinces -->
+      <div class="col-md-12 row">
+        <div class="col-md-2 form-check" *ngFor="let province of allProvinces">
+          <input class="form-check-input" (change)="onChange(province, $event.target.checked)" [checked]="selectedProvinces.includes(province)" name="{{ province }}"
+            type="checkbox" id="{{province}}">
+          <label class="form-check-label" for="{{province}}">
+            {{province}}
+          </label>
+        </div>
+      </div>
+      <!-- Data Table -->
+      <div class="card my-3">
+        <div class="card-body">
+          <h4 class="card-title">ผู้ป่วยทั้งหมดภายในจังหวัด <small>( {{ updatedDate | date: 'medium' }} )</small></h4>
+          <ngx-datatable #tableAllCase class="material mt-3" style="height: 500px;" [columns]="columnsAllCase"
+            columnMode="force" [headerHeight]="50" [footerHeight]="0" [rowHeight]="50" [rows]="rowsAllCase"
+            [scrollbarV]="true" [scrollbarH]="true">
+          </ngx-datatable>
+        </div>
+      </div>
+
     </div>
   </div>
 </ng-container>

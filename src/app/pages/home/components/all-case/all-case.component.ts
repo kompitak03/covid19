@@ -1,3 +1,4 @@
+import { TodayCaseByProvinces } from './../../interfaces/today-case-by-provinces';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { HomeService } from "../../services/home.service";
 import { DatatableComponent } from "@swimlane/ngx-datatable";
@@ -8,65 +9,91 @@ import { DatatableComponent } from "@swimlane/ngx-datatable";
   styleUrls: ["./all-case.component.scss"],
 })
 export class AllCaseComponent implements OnInit {
-  rowsAllCase = [];
+  rowsAllCase: TodayCaseByProvinces[] = [];
   tempAllCase = [];
+  allProvinces = [];
+  selectedProvinces = [];
+  updatedDate = new Date();
 
   columnsAllCase = [
     {
-      prop: "ConfirmDate",
-      name: "วันที่ยืนยัน",
+      prop: "new_case",
+      name: "รายใหม่",
     },
     {
-      prop: "No",
-      name: "รายที่",
+      prop: "new_death",
+      name: "เสียชีวิต",
     },
     {
-      prop: "Age",
-      name: "อายุ",
+      prop: "province",
+      name: "จังหวัด",
     },
     {
-      prop: "Gender",
-      name: "เพศ",
+      prop: "total_case",
+      name: "ทั้งหมด",
     },
     {
-      prop: "Nation",
-      name: "สัญชาติ",
-    },
-    {
-      prop: "Province",
-      name: "พบที่จังหวัด",
-    },
-    {
-      prop: "District",
-      name: "พบที่อำเภอ",
+      prop: "total_death",
+      name: "เสียชีวิตทั้งหมด",
     },
   ];
 
   @ViewChild(DatatableComponent, { static: false })
   tableAllCase: DatatableComponent;
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: HomeService) { }
 
-  ngOnInit(): void {
-    this.onGetAllCase();
+  async ngOnInit() {
+
+    let selectedProvinces = localStorage.getItem("selectedProvinces");
+    if (selectedProvinces) {
+      this.selectedProvinces = JSON.parse(selectedProvinces);
+    } else {
+      localStorage.setItem("selectedProvinces", "[]");
+    }
+    await this.onGetAllCase();
+    await this.updateAllCase();
+
   }
 
-  onGetAllCase() {
-    this.homeService.getAllCase().then((res: any) => {
-      if (res) {
-        res.Data = res.Data;
-        // cache our list
-        this.tempAllCase = [...res.Data];
+  async onGetAllCase() {
 
-        // push our inital complete list
-        this.rowsAllCase = res.Data;
+    await this.homeService.getTodayCaseByProvinces().then((res: TodayCaseByProvinces[]) => {
+      if (res) {
+        this.updatedDate = new Date(res[0].update_date);
+        this.allProvinces = res.map(data => data.province);
+        this.rowsAllCase = res;
+        this.tempAllCase = res;
       }
     });
-    // this.homeService.getAllCaseSum().then((res: any) => {
-    //   console.log(res);
-    // });
-    // this.homeService.getArea().then((res: any) => {
-    //   console.log(res);
-    // });
+
   }
+
+  onChange(province: string, isChecked: boolean) {
+    if (isChecked) {
+      this.selectedProvinces.push(province);
+      localStorage.setItem("selectedProvinces", JSON.stringify(this.selectedProvinces));
+    } else {
+      let index = this.selectedProvinces.indexOf(province);
+      this.selectedProvinces.splice(index, 1);
+      localStorage.setItem("selectedProvinces", JSON.stringify(this.selectedProvinces));
+    }
+
+    this.updateAllCase();
+
+  }
+
+  updateAllCase() {
+
+    this.rowsAllCase = this.tempAllCase.filter((data) => {
+
+      if (this.selectedProvinces.length === 0) {
+        return this.tempAllCase;
+      } else {
+        return this.selectedProvinces.includes(data.province);
+      }
+
+    });
+  }
+
 }
