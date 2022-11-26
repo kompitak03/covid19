@@ -61,7 +61,10 @@ export class AllCaseComponent implements OnInit {
     await this.homeService.getTodayCaseByProvinces().then((res: TodayCaseByProvinces[]) => {
       if (res) {
         this.updatedDate = new Date(res[0].update_date);
-        this.allProvinces = res.map(data => data.province);
+        this.allProvinces = res
+          .map(data => data.province)
+          .filter(data => data !== "ทั้งประเทศ" && data !== "ไม่ระบุ")
+          .sort((a, b) => a.localeCompare(b, 'th'));
         this.rowsAllCase = res;
         this.tempAllCase = res;
       }

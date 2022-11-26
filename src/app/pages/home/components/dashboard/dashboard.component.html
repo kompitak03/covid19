@@ -9,10 +9,10 @@
               <span> {{ total.total_case }} ราย </span>
               <span class="font-weight-bolder">
                 <span *ngIf="total.new_case >= 0; else NewConfirmed">
-                  วันนี้เพิ่มขึ้น
+                  สัปดาห์นี้เพิ่มขึ้น
                 </span>
                 <ng-template #NewConfirmed>
-                  วันนี้ลดลง
+                  สัปดาห์นี้ลดลง
                 </ng-template>
                 {{ total.new_case }}
               </span>
@@ -31,10 +31,10 @@
               <span>{{ total.total_death }} ราย </span>
               <span class="font-weight-bolder">
                 <span *ngIf="total.new_death >= 0; else NewDeaths">
-                  วันนี้เพิ่มขึ้น
+                  สัปดาห์นี้เพิ่มขึ้น
                 </span>
                 <ng-template #NewDeaths>
-                  วันนี้ลดลง
+                  สัปดาห์นี้ลดลง
                 </ng-template>
                 {{ total.new_death }}
               </span>
@@ -53,10 +53,10 @@
               <span> {{ total.total_recovered }} ราย </span>
               <span class="font-weight-bolder">
                 <span *ngIf="total.new_recovered >= 0; else recoveres">
-                  วันนี้เพิ่มขึ้น
+                  สัปดาห์นี้เพิ่มขึ้น
                 </span>
                 <ng-template #recoveres>
-                  วันนี้ลดลง
+                  สัปดาห์นี้ลดลง
                 </ng-template>
                 {{ total.new_recovered }}
               </span>

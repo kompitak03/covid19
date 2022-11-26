@@ -13,7 +13,7 @@ export class TimelineComponent implements OnInit {
   temp = [];
 
   columns = [
-    { prop: "txn_date", name: "วันที่" },
+    { prop: "year_weeknum", name: "ปี / สัปดาห์ที่" },
     { prop: "new_case", name: "รายใหม่"},
     { prop: "new_recovered", name: "รักษาหายแล้ว" },
     { prop: "new_death", name: "เสียชีวิต" },
@@ -24,14 +24,18 @@ export class TimelineComponent implements OnInit {
   constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
-    this.homeService.getTimeLine().then((res: any) => {
-      if (res) {
-        res = res.reverse();
+    this.homeService.getTimeLine().then((results: any) => {
+      if (results) {
+        results = results.map(res => {
+          res.year_weeknum = `${res.year} / ${res.weeknum}`;
+          return res;
+        });
+        results = results.reverse();
         // cache our list
-        this.temp = [...res];
+        this.temp = [...results];
 
         // push our inital complete list
-        this.rows = res;
+        this.rows = results;
       }
     });
   }
